@@ -13,4 +13,12 @@ connection.once('open',()=>{
     console.log("Mongodb database connection established succsesfully");
 })
 
+const TodoRouter=require('./routes/Todos');
+const SubTodosRouter=require('./routes/SubTodos');
+const UsersRouter=require('./routes/users');
+
+app.use('/Todos',TodoRouter);
+app.use('/SubTodos',SubTodosRouter);
+app.use('/users',UsersRouter);
+
 app.listen(5000,()=>{console.log(`Server is running on port:5000`);});
