@@ -21,4 +21,26 @@ router.route('/add').post((req,res)=>{
         .then(()=>res.json('Todo added'))
         .catch(err=>res.status(400).json('Error'+err));
 });
+router.route("/:id").get((req,res)=>{
+    Todo.findById(req.params.id)
+        .then(Todo=>res.json(Todo))
+        .catch(err=>res.status(400).json('Error'+err));
+});
+router.route("/:id").delete((req,res)=>{
+    Todo.findByIdAndDelete(req.params.id)
+        .then(()=>res.json('Todo deleted.'))
+        .catch(err=>res.status(400).json('Error'+err));
+});
+router.route('update/:id').post((req,res)=>{
+    Todo.findById(req.params.id)
+    .then(Todo=>{
+        Todo.Todotitle=req.body.Todotitle;
+        Todo.Todosevingdate=req.body.Todosevingdate;
+        Todo.Description=req.body.Description;
+    Todo.save()
+        .then(()=>res.json('Todo Updated'))
+        .catch(err => res.status(400).json('Error:'+err));
+    })
+    .catch(err => res.status(400).json('Error:'+err));
+});
 module.exports= router;

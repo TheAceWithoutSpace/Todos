@@ -19,3 +19,25 @@ NewSubTodos.save()
     .then(()=>res.json('SubTodo added'))
     .catch(err=>res.status(400).json('Error:'+err));
 });
+router.route('/:id').get((req,res)=>{
+    SubTodos.findById(req.params.id)
+        .then(()=>res.json(SubTodos))
+        .catch(err=>res.status(400).json('Error:'+err));
+});
+router.route('/:id').delete((req,res)=>{
+    SubTodos.findByIdAndDelete(req.params.id)
+        .then(()=>res.json('SubTodo Deleted'))
+        .catch(err=>res.status(400).json('Error:'+err));
+});
+router.route('/update/:id').post((req,res)=>{
+    SubTodos.findById(req.params.id)
+    .then(SubTodos=>{
+        SubTodos.SubTodotitle=req.body.SubTodotitle;
+        SubTodos.SubTodoDescription=req.body.SubTodoDescription;
+    
+        SubTodos.save()
+            .then(()=>res.json('SubTodo updated'))
+            .catch(err => res.status(400).json('Error:'+err));
+    })
+    .catch(err => res.status(400).json('Error:'+err));
+})
