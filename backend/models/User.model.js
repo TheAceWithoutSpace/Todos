@@ -1,4 +1,5 @@
-import moongoose from "mongoose";
+const mongoose = require("mongoose");
+const passportLocalMongoose=require('passport-local-mongoose');
 
 const Schema= mongoose.Schema;
 
@@ -15,10 +16,11 @@ const userSchema=new Schema({
     password:{
         required:true,
         type:String,
-        minlength:5
+        minlength:2
     },
 },{
     timestamp:true,
 });
+userSchema.plugin(passportLocalMongoose);
 const User =mongoose.model('User',userSchema);
 module.exports=User;

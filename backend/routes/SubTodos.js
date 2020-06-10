@@ -7,21 +7,20 @@ router.route('/').get((req,res)=>{
         .catch(err=>res.status(400).json('Error:'+err));      
 });
 router.route('/add').post((req,res)=>{
+    const TodoId=req.body.TodoId;
+    const SubTodotitle=req.body.SubTodotitle;
+    const SubTodoDescription=req.body.SubTodoDescription;
 
-const TodoId=req.body.TodoId;
-const SubTodotitle=req.body.SubTodotitle;
-const SubTodoDescription=req.body.SubTodoDescription;
-
-const NewSubTodos=new SubTodo({
+    const NewSubTodos=new SubTodo({
     TodoId,SubTodotitle,SubTodoDescription
-})
-NewSubTodos.save()
-    .then(()=>res.json('SubTodo added'))
-    .catch(err=>res.status(400).json('Error:'+err));
+    });
+    NewSubTodos.save()
+        .then(()=>res.json('SubTodo added'))
+        .catch(err=>res.status(400).json('Error:'+err));
 });
 router.route('/:id').get((req,res)=>{
     SubTodos.findById(req.params.id)
-        .then(()=>res.json(SubTodos))
+        .then((SubTodos)=>res.json(SubTodos))
         .catch(err=>res.status(400).json('Error:'+err));
 });
 router.route('/:id').delete((req,res)=>{
@@ -35,9 +34,10 @@ router.route('/update/:id').post((req,res)=>{
         SubTodos.SubTodotitle=req.body.SubTodotitle;
         SubTodos.SubTodoDescription=req.body.SubTodoDescription;
     
-        SubTodos.save()
-            .then(()=>res.json('SubTodo updated'))
-            .catch(err => res.status(400).json('Error:'+err));
+    SubTodos.save()
+        .then(()=>res.json('SubTodo updated'))
+        .catch(err => res.status(400).json('Error:'+err));
     })
     .catch(err => res.status(400).json('Error:'+err));
-})
+});
+module.exports=router;

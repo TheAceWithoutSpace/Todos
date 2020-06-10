@@ -1,5 +1,5 @@
-const router=require('express').Router();
-let Todo=require('../models/Todo.model');
+const router = require('express').Router();
+let Todo = require('../models/Todo.model');
 
 router.route('/').get((req,res)=>{
     Todo.find()
