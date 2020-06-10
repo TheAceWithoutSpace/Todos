@@ -9,7 +9,7 @@ export default class Navbar extends Component{
                 <div className="collpase navbar-collapse">
                     <ul className="navbar-nav mr-auto">
                         <li className="navbar-item">
-                            <Link to='/userlogin' className='nav-link'>Login</Link>
+                            <Link to='/Login' className='nav-link'>Login</Link>
                         </li>
                         <li className="navbar-item">
                             <Link to ='/SignUp' className='nav-link'>Sign Up</Link>
