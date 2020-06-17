@@ -7,19 +7,24 @@ router.route('/').get((req,res)=>{
         .catch(err=>res.status(400).json('Error:'+err));      
 });
 router.route('/add').post((req,res)=>{
-    const TodoId=req.body.TodoId;
+    const TodoId=req.body.TodoID;
     const SubTodotitle=req.body.SubTodotitle;
     const SubTodoDescription=req.body.SubTodoDescription;
 
-    const NewSubTodos=new SubTodo({
+    const NewSubTodos=new SubTodos({
     TodoId,SubTodotitle,SubTodoDescription
     });
     NewSubTodos.save()
         .then(()=>res.json('SubTodo added'))
         .catch(err=>res.status(400).json('Error:'+err));
 });
-router.route('/:id').get((req,res)=>{
+router.route('/edit/:id').get((req,res)=>{
     SubTodos.findById(req.params.id)
+        .then((SubTodos)=>res.json(SubTodos))
+        .catch(err=>res.status(400).json('Error:'+err));
+});
+router.route('/:id').get((req,res)=>{
+    SubTodos.find({TodoId:req.params.id})
         .then((SubTodos)=>res.json(SubTodos))
         .catch(err=>res.status(400).json('Error:'+err));
 });
@@ -28,6 +33,11 @@ router.route('/:id').delete((req,res)=>{
         .then(()=>res.json('SubTodo Deleted'))
         .catch(err=>res.status(400).json('Error:'+err));
 });
+router.route('/deleteall/:id').delete((req,res)=>{
+    SubTodos.deleteMany({TodoID:req.param.id})
+        .then(()=>res.json('SubTodo Deleted'))
+        .catch(err=>res.status(400).json('Error:'+err));
+})
 router.route('/update/:id').post((req,res)=>{
     SubTodos.findById(req.params.id)
     .then(SubTodos=>{

@@ -43,19 +43,18 @@ export default class createUser extends Component{
         axios.post('http://localhost:3000/users/add',user)
             .then(res=>{
                 console.log(res.data);
-                if(res.data==='Created')
+                if(res.data)
                 {
                 this.props.Auth(res.data);
                 }
             })
             .catch(err=>console.log("signup err"+err));
-         //window.location='/';
     }
     
     render(){
         return(
             <div>
-            <h3>Create New User</h3>
+            <h3>SignUp</h3>
             <form onSubmit={this.onsubmit}>
                 <div className="form-group">
                     <label>Username:</label>
@@ -76,7 +75,7 @@ export default class createUser extends Component{
                     onChange={this.onChangePassword}/>
                 </div>
                 <div>
-                    <button type="submit" className="btn btn-primary">createUser</button>
+                    <button type="submit" className="btn btn-outline-primary btn-block">createUser</button>
                 </div>
             </form>
         </div>

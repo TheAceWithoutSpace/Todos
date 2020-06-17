@@ -40,18 +40,18 @@ export default class CreateTodo extends Component{
         e.preventDefault();
 
         const Todo={
-            userId:this.props.user[0]._id,
+            userId:localStorage.getItem('UserID'),
             Todotitle:this.state.Todotitle,
             Todosevingdate:this.state.Todosevingdate,
             Description:this.state.Description
         }
         console.log(Todo);
-        console.log(this.props.user[0]._id);
+        
         
         axios.post("http://localhost:3000/Todos/add",Todo)
             .then(res => console.log(res.data));
             
-         window.location='/MyTodos';
+        window.location=`/MyTodos`
     }
 
     render(){

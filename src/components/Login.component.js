@@ -33,9 +33,11 @@ export default class Login extends Component{
 
         console.log(User);
         axios.post('http://localhost:3000/users/login',User)
-            .then(res=>{if(res.data)
-                {this.props.Auth(res.data)
-                console.log(this.props)}
+            .then(res=>{
+                if(res.data)
+                {
+                    this.props.Auth(res.data[0]._id)
+                }
             })
             .catch(err=>console.log('loginerr'+err));
     }
@@ -43,7 +45,7 @@ export default class Login extends Component{
     render(){
         return(
             <div>
-            <h3>Loggin</h3>
+            <h3>Login</h3>
             <form onSubmit={this.onsubmit}>
                 <div className="form-group">
                     <label>Username:</label>
@@ -58,7 +60,7 @@ export default class Login extends Component{
                     onChange={this.onChangePassword}/>
                 </div>
                 <div>
-                    <button type="submit"  className="btn btn-primary">Login</button>
+                    <button type="submit" className="btn btn-outline-primary btn-block">Login</button>
                 </div>
             </form>
         </div>

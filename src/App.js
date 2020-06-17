@@ -9,6 +9,8 @@ import EditTodo from "./components/EditTodo.component";
 import MyTodos from './components/MyTodos.component';
 import UserSpecs from './components/UserSpecs.component';
 import LoginSignup from './components/login-SignUp.component';
+import SubTodos from'./components/SubTodos.component';
+import EditSubtodo from'./components/EditSubTodo.component';
 
 export default class App extends Component{
   constructor(){
@@ -27,7 +29,7 @@ export default class App extends Component{
       user:data
       
     });
-    console.log(this.state.user);
+    localStorage.setItem('UserID',data);
   }
   render()
   {
@@ -44,24 +46,10 @@ export default class App extends Component{
           <Route path="/myTodos" exact render={props=>(<MyTodos {...props} handleLogin={this.handleLogin} user={this.state.user} loggedInStatus={this.state.loggedInStatus}/>)}/>
           <Route path="/UserSpecs" component={UserSpecs}/>
           <Route path="/EditTodo/:id" component={EditTodo}/> 
+          <Route path="/SubTodos/:id" component={SubTodos}/>
+          <Route path="/EditSubTodos/:id" component={EditSubtodo}/>
       </Router>
     </div>
   );
 }
 }
-
-//   return(
-//     <Router>
-//       <Navbar />
-//       <br/>
-//       <Route path="/" exact component={HomePage}/>
-//       <Route path='edit/:id' component={EditTodo}/>
-//       <Route path='/createTodo' component={CreateTodo}/>
-//       <Route path='/createSubTodo'component={createSubTodo}/>
-//       <Route path="/SignUp" component={createUser}/>
-//       <Route path="/login"component={UserLogin}/>
-//       <Route path="/myTodos" component={MyTodos}/>
-//       <Route path="/UserSpecs" component={UserSpecs}/>
-//     </Router>
-//   );
-// }

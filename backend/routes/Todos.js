@@ -22,18 +22,23 @@ router.route('/add').post((req,res)=>{
         .catch(err=>res.status(400).json('Error'+err));
 });
 router.route("/:id").get((req,res)=>{
-    Todo.findById(req.params.id)
+    Todo.find({userId:req.params.id})
         .then(Todo=>res.json(Todo))
         .catch(err=>res.status(400).json('Error'+err));
+});
+router.route('/edit/:id').get((req,res)=>{
+    Todo.findById(req.params.id)
+        .then((Todos)=>res.json(Todos))
+        .catch(err=>res.status(400).json('Error:'+err));
 });
 router.route("/:id").delete((req,res)=>{
     Todo.findByIdAndDelete(req.params.id)
         .then(()=>res.json('Todo deleted.'))
         .catch(err=>res.status(400).json('Error'+err));
 });
-router.route('update/:id').post((req,res)=>{
+router.route('/update/:id').post((req,res)=>{
     Todo.findById(req.params.id)
-    .then(Todo=>{
+    .then(Todo=>{ 
         Todo.Todotitle=req.body.Todotitle;
         Todo.Todosevingdate=req.body.Todosevingdate;
         Todo.Description=req.body.Description;

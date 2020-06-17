@@ -7,18 +7,19 @@ export default class Login_Signup extends Component{
         super(props);
         this.state={
             status:false,
-            mod:'SignUp'
+            mod:'Login'
         }
         
         this.Auth=this.Auth.bind(this);
-        this.handelLogin=this.handelLogin.bind(this);
+        this.handelLog=this.handelLog.bind(this);
         this.handelmod=this.handelmod.bind(this);
     }
     Auth(data){
         this.props.handleLogin(data);
-        this.props.history.push('/myTodos');
+        console.log(data);
+        window.location='/MyTodos';
     }
-    handelLogin(){
+    handelLog(){
         this.setState(state=>({status:!state.status} ))
         this.handelmod()
     } 
@@ -33,11 +34,11 @@ export default class Login_Signup extends Component{
         const flag=this.state.status;
         const temp =this.state.mod
         return(
-            <div>
-                <h1>Login_Signup Component</h1>
-                <h3>stat:{this.props.loggedInStatus}</h3>
-                {flag?<Login Auth={this.Auth}/>:<Signup Auth={this.Auth}/>}
-        <button className="btn btn-primary" onClick={this.handelLogin}>{temp}</button>
+            <div className="container border border-dark" style={{width:'35%',margin: '0% auto',padding:'12%',background:'rgb(246, 246, 246)'}}>
+                <div className="row">
+                    {flag?<Login className="container" Auth={this.Auth}/>:<Signup className="container" Auth={this.Auth}/>}
+                    <button className="btn btn-outline-info btn-block" onClick={this.handelLog}>{temp}</button>
+                </div>
             </div>
         )
     }

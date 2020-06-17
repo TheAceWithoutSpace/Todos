@@ -2,30 +2,32 @@ import React,{Component}from 'react';
 import{Link} from 'react-router-dom';
 import axios from 'axios';
 
-const Todos = props=>(
+const SubTodos = props=>(
     <tr style={{textDecoration:props.checked?"line-through":""}}>
         <td>
             <input type="checkbox" 
             defaultChecked={props.checked} 
             onClick={props.handelChange}/>
         </td>
-        <td>{props.todo.Todotitle}</td>
-        <td>{props.todo.Description}</td>
-        <td>{props.todo.Todosevingdate.substring(0,10)}</td>
-        <td> 
-            <Link className='btn btn-info' to={`/SubTodos/${props.todo._id}`}>ShowMore</Link>
+        <td>{props.SubTodos.SubTodotitle}</td>
+        <td>{props.SubTodos.SubTodoDescription}</td>
+        <td>
+            <Link className="btn btn-warning" to={`/EditSubTodos/${props.SubTodos._id}`}>edit</Link>  
+            <Link className='btn btn-danger' onClick={()=>{props.deleteSubTodo(props.SubTodos._id)} }
+             to={`/SubTodos/${props.SubTodos._id}`}>delete</Link>
         </td>
     </tr>
 )
 
 
-export default class SubTodos extends Component{
+export default class SubTodoss extends Component{
     constructor(props){
         super(props);
         
+        this.deleteSubTodo=this.deleteSubTodo.bind(this);
         this.handelChange=this.handelChange.bind(this)
         
-        this.state={Todos:[],checked:false};
+        this.state={SubTodos:[],checked:false};
     }
     handelChange({target},checked)
     {
@@ -39,18 +41,25 @@ export default class SubTodos extends Component{
         this.setState({checked:!this.state.checked})
     }
     componentDidMount(){
-        axios.get(`http://localhost:3000/Todos/${this.props.userID}`)
-        .then(res=>{this.setState({Todos:res.data})})
+        axios.get(`http://localhost:3000/SubTodos/${this.props.TodoID}`)
+        .then(res=>{this.setState({SubTodos:res.data})})
         .catch(err=>{console.log('Error'+err)})
     }
-
-    TodosList(){
-        return this.state.Todos.map(currentTodo=>{
-            return<Todos todo={currentTodo} 
+    deleteSubTodo(id){
+        axios.delete('http://localhost:3000/SubTodos/'+id)
+            .then(res=>console.log(res.data))
+        this.setState({
+            SubTodos:this.state.SubTodos.filter(el=>el._id!==id)
+        })
+    }
+    SubTodosList(){
+        return this.state.SubTodos.map(CurrentSubTodos=>{
+            return<SubTodos SubTodos={CurrentSubTodos} 
             checked={this.state.checked}
             handelChange={this.handelChange} 
-            deleteTodo={this.deleteTodo} 
-            key={currentTodo._id}/>;
+            deleteSubTodo={this.deleteSubTodo} 
+            TodoID={this.props.TodoID}
+            key={CurrentSubTodos._id}/>;
         })
     }
     render(){
@@ -61,13 +70,12 @@ export default class SubTodos extends Component{
                     <thead className="thead-light">
                         <tr>
                             <th>Is done</th>
-                            <th>Todotitle</th>
+                            <th>SubTodotitle</th>
                             <th>Description</th>
-                            <th>Todosevingdate</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {this.TodosList()}
+                        {this.SubTodosList()}
                     </tbody>
                 </table>
             </div>

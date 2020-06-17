@@ -9,19 +9,6 @@ User.find()
     .then(users=>res.json(users))
     .catch(err=>res.status(400).json('Error:'+err));
 });
-// router.route('/login').post(async(req,res)=>{
-//     User.find({username:req.body.username})
-//         .then(user=> {
-//             if(user[0].password===req.body.password){
-//                 Login=true;
-//                 res.json(user[0]._id);
-//             }
-//             else{
-//                 res.json('WrongPassword');
-//             }
-//         })
-//         .catch(err=>res.status(400).json('Error:'+err));
-// });
 router.route('/login').post(async(req,res)=>{
     User.find({username:req.body.username})
         .then(user=>{
@@ -43,7 +30,8 @@ router.route('/login').post(async(req,res)=>{
         })
 });
 router.route('/add').post(async (req,res) => {
-    try{
+    
+    try{  
         const username=req.body.username;
         const email=req.body.email;
         const password=await bcrypt.hash(req.body.password,10)
@@ -53,22 +41,23 @@ router.route('/add').post(async (req,res) => {
             email:email,
             password:password,
         });
-
         newUser.save()
-            .then(()=>res.status(201).json('Created'))
+            .then(user=>res.status(201).json(user._id))
             .catch(err=>res.status(400).json('Error:'+err));
     }
     catch{
-        res.status(500).json('Error'+err);
+        err=>res.status(500).json('Error'+err);
     }
 
 });
-// router.route('logged_in').get((req,res)=>{
-//     then(()=>res.status(201).json(Login));
+router.route('logged_in').get((req,res)=>{
+    then(()=>res.status(201).json('Login'));
 
-// });
+});
 async function checkUser(inputPassword,dbPassword){
     const match=await bcrypt.compare(inputPassword,dbPassword);
     return match;
 }
+
+
 module.exports=router;

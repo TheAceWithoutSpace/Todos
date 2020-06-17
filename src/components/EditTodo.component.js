@@ -20,7 +20,7 @@ export default class EditTodo extends Component{
         }
     }
     componentDidMount(){
-        axios.get('http://localhost:3000/Todos/'+this.props.match.params.id)
+        axios.get('http://localhost:3000/Todos/edit/'+this.props.match.params.id)
         .then(res=>{
             this.setState({
                 Todotitle:res.data.Todotitle,
@@ -51,17 +51,16 @@ export default class EditTodo extends Component{
         e.preventDefault();
 
         const Todo={
-            userId:this.props.user[0]._id,
             Todotitle:this.state.Todotitle,
             Todosevingdate:this.state.Todosevingdate,
             Description:this.state.Description
         }
-        console.log(Todo);
-        console.log(this.props.user[0]._id);
-        
-        axios.post('http://localhost:3000/Todos/update'+this.props.match.params.id,Todo)
+        //console.log(Todo);
+
+        console.log(this.props.match.params)
+        axios.post('http://localhost:3000/Todos/update/'+this.props.match.params.id,Todo)
             .then(res=>console.log(res.data));
-            window.location='/MyTodos';
+        window.location='/MyTodos';
     }   
 
     render(){
