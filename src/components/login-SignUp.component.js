@@ -7,7 +7,8 @@ export default class Login_Signup extends Component{
         super(props);
         this.state={
             status:false,
-            mod:'Login'
+            mod:'Login',
+            err:''
         }
         
         this.Auth=this.Auth.bind(this);
@@ -36,7 +37,7 @@ export default class Login_Signup extends Component{
         return(
             <div className="container border border-dark" style={{width:'35%',margin: '0% auto',padding:'12%',background:'rgb(246, 246, 246)'}}>
                 <div className="row">
-                    {flag?<Login className="container" Auth={this.Auth}/>:<Signup className="container" Auth={this.Auth}/>}
+                    {flag?<Login err={this.state.err} className="container" Auth={this.Auth}/>:<Signup className="container" Auth={this.Auth}/>}
                     <button className="btn btn-outline-info btn-block" onClick={this.handelLog}>{temp}</button>
                 </div>
             </div>

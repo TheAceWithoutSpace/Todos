@@ -10,9 +10,9 @@ router.route('/add').post((req,res)=>{
     const TodoId=req.body.TodoID;
     const SubTodotitle=req.body.SubTodotitle;
     const SubTodoDescription=req.body.SubTodoDescription;
-
+    const done= 'false';
     const NewSubTodos=new SubTodos({
-    TodoId,SubTodotitle,SubTodoDescription
+    TodoId,SubTodotitle,SubTodoDescription,done
     });
     NewSubTodos.save()
         .then(()=>res.json('SubTodo added'))
@@ -46,6 +46,16 @@ router.route('/update/:id').post((req,res)=>{
     
     SubTodos.save()
         .then(()=>res.json('SubTodo updated'))
+        .catch(err => res.status(400).json('Error:'+err));
+    })
+    .catch(err => res.status(400).json('Error:'+err));
+});
+router.route('/isdone/:id').post((req,res)=>{
+    SubTodos.findById(req.params.id)
+    .then(SubTodos=>{
+        SubTodos.done=req.body.done
+    SubTodos.save()
+        .then(()=>res.json(SubTodos))
         .catch(err => res.status(400).json('Error:'+err));
     })
     .catch(err => res.status(400).json('Error:'+err));

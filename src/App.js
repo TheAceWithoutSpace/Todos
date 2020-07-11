@@ -11,6 +11,9 @@ import UserSpecs from './components/UserSpecs.component';
 import LoginSignup from './components/login-SignUp.component';
 import SubTodos from'./components/SubTodos.component';
 import EditSubtodo from'./components/EditSubTodo.component';
+import AdminShowUser from './components/AdminShowUser.component';
+import AdminSpecs from "./components/AdminSpecs.component";
+import Admin from "./components/Admin.component";
 
 export default class App extends Component{
   constructor(){
@@ -48,6 +51,9 @@ export default class App extends Component{
           <Route path="/EditTodo/:id" component={EditTodo}/> 
           <Route path="/SubTodos/:id" component={SubTodos}/>
           <Route path="/EditSubTodos/:id" component={EditSubtodo}/>
+          <Route path="/admin" component={Admin}/>
+          <Route path="/adminShowUser" component={AdminShowUser}/>
+          <Route path="/AdminSpecs" component={AdminSpecs}/>
       </Router>
     </div>
   );

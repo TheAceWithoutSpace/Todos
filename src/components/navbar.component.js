@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import {Link} from 'react-router-dom';
- function logout()
+function logout()
 {
 localStorage.removeItem('UserID')
 window.location.href = '/';
@@ -9,6 +9,25 @@ function Loggedin (){
     const isLoggedIn=localStorage.getItem('UserID')
     if(isLoggedIn)
     {
+        if(isLoggedIn==='5eefc438666ffd2524a947a4')
+        {
+            return(
+            <ul className="navbar-nav mr-auto">
+                <li className="navbar-item">
+                    <Link to ='/MyTodos' className='nav-link'>MyTodos</Link>
+                </li>
+                <li className="navbar-item">
+                    <Link to ='/UserSpecs' className='nav-link'>UserSpecs</Link>
+                </li>
+                <li className='navbar-item'>
+                    <Link to='/admin' className='nav-link'>AdminPage</Link>
+                </li>
+                <li className='navbar-item'>
+                    <button onClick={logout} className='nav-link btn btn-dark'>Logout</button>
+                </li>
+            </ul>
+            )
+        }else{
         return(
         <ul className="navbar-nav mr-auto">
             <li className="navbar-item">
@@ -21,7 +40,7 @@ function Loggedin (){
                 <button onClick={logout} className='nav-link btn btn-dark'>Logout</button>
             </li>
         </ul>
-        )
+        )}
     }else{
         return(
         <ul className="navbar-nav mr-auto">

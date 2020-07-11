@@ -17,15 +17,20 @@ export default class MyTodos extends Component{
     render(){
         localStorage.setItem('TodoID',this.props.match.params.id)
         return(
-            <div>
-                <div>
-                <Link className="btn btn-success" to="/createSubTodo">CreatenewSubTodo</Link>
-                <Link className="btn btn-warning" to={`/EditTodo/${this.props.match.params.id}`}>edit Todo</Link> 
-                <Link className="btn btn-danger" 
-                onClick={()=>{this.deleteTodo(this.props.match.params.id) }}
-                to={`/${this.props.match.params.id}`}>Delete Todo</Link>
+            <div className="row justify-content-between">
+                <div className="col-sm-10">
+                <SubTodoBox  TodoID={this.props.match.params.id}/>
                 </div>
-                <SubTodoBox TodoID={this.props.match.params.id}/>
+                <div className='col-sm-2 align-self-center'>
+                    <div className="row justify-content-center">
+                    <Link className="btn btn-info w-100 col-sm-8" to="/createSubTodo">NewSubTodo</Link>
+                    <Link className="btn btn-warning w-100 col-sm-8" to={`/EditTodo/${this.props.match.params.id}`}>Edit Todo</Link> 
+                    <Link className="btn btn-danger w-100 col-sm-8" 
+                    onClick={()=>{this.deleteTodo(this.props.match.params.id) }}
+                    to={`/${this.props.match.params.id}`}>Delete Todo</Link>
+                    <a href={'/SubTodos/'+this.props.match.params.id}className='btn btn-primary'>save changes</a> 
+                    </div>
+                </div>
             </div>
         )
     }

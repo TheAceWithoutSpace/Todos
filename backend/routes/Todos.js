@@ -12,9 +12,10 @@ router.route('/add').post((req,res)=>{
     const Todotitle = req.body.Todotitle;
     const Todosevingdate=Date.parse(req.body.Todosevingdate);
     const Description= req.body.Description;
+    const done='false';
 
     const NewTodo= new Todo({
-        userId,Todotitle,Todosevingdate,Description
+        userId,Todotitle,Todosevingdate,Description,done
     });
 
     NewTodo.save()
@@ -35,6 +36,21 @@ router.route("/:id").delete((req,res)=>{
     Todo.findByIdAndDelete(req.params.id)
         .then(()=>res.json('Todo deleted.'))
         .catch(err=>res.status(400).json('Error'+err));
+});
+router.route('/deleteall/:id').delete((req,res)=>{
+    Todo.deleteMany({userId:req.param.id})
+        .then(()=>res.json('Todo Deleted'))
+        .catch(err=>res.status(400).json('Error:'+err));
+});
+router.route('/isdone/:id').post((req,res)=>{
+    Todo.findById(req.params.id)
+    .then(Todo=>{
+        Todo.done=req.body.done
+        Todo.save()
+        .then(()=>res.json(Todo))
+        .catch(err => res.status(400).json('Error:'+err));
+    })
+    .catch(err => res.status(400).json('Error:'+err));
 });
 router.route('/update/:id').post((req,res)=>{
     Todo.findById(req.params.id)

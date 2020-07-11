@@ -6,10 +6,10 @@ export default class Home extends Component{
             <div>
                 <div className="jumbotron">
                     <h1 className="display-4">Hello</h1>
-                    <p className="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+                    <p className="lead">welcome, to Todo's this site made for you to organize you'r tasks.</p>
                     <hr className="my-4"/>
-                    <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-                    <a name="btn btn-primary btn-lg" href="/Login" role="button">To Login</a>
+                    <p>we believe that every task assembled from smaller tasks.</p>
+                    <a className='btn btn-info' name="btn btn-primary btn-lg" href="/Login" role="button">To Login</a>
                 </div>
             </div>
         )

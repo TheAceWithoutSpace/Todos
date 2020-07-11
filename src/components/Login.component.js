@@ -39,8 +39,8 @@ export default class Login extends Component{
                     this.props.Auth(res.data[0]._id)
                 }
             })
-            .catch(err=>console.log('loginerr'+err));
-    }
+            .catch(err=>console.log(err))
+        }
     
     render(){
         return(

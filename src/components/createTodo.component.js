@@ -72,7 +72,7 @@ export default class CreateTodo extends Component{
                         onChange={this.onChangeDescription}/>
                     </div>
                     <div className="form-group">
-                        <label>ServingDate:</label>
+                        <label>Date of Submission:</label>
                         <div>
                             <DatePicker
                             required 

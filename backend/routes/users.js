@@ -29,6 +29,11 @@ router.route('/login').post(async(req,res)=>{
             }
         })
 });
+router.route("/:id").delete((req,res)=>{
+    User.findByIdAndDelete(req.params.id)
+        .then(()=>res.json('User deleted.'))
+        .catch(err=>res.status(400).json('Error'+err));
+});
 router.route('/add').post(async (req,res) => {
     
     try{  

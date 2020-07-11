@@ -8,6 +8,7 @@ export default class MyTodos extends Component{
             <div>
                 <div>
                 <Link className="btn btn-success" to="createTodo">CreatenewTodo</Link>
+                <a href='MyTodos' className='btn btn-info'>Save Changes</a>
                 </div>
                 <TodoBox userID={userID}/>
             </div>
