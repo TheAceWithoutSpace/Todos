@@ -16,7 +16,7 @@ export default class SubTodos extends Component{
     }
 
     TodosList(){
-        return this.state.Todos.map(currentTodo=>{
+        return this.state.Todos.map( currentTodo=>{
             return<TodoTableRow todo={currentTodo}
             checked={this.state.checked}
             deleteTodo={this.deleteTodo} 
@@ -32,6 +32,7 @@ export default class SubTodos extends Component{
                             <th>Is done</th>
                             <th>Todotitle</th>
                             <th>Description</th>
+                            <th>SubTodos</th>
                             <th>Date of Submission</th>
                             <th>To See The SubTodos</th>
                         </tr>
