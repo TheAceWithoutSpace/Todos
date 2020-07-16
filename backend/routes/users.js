@@ -9,20 +9,21 @@ User.find()
     .then(users=>res.json(users))
     .catch(err=>res.status(400).json('Error:'+err));
 });
-router.route('/login').post(async(req,res)=>{
+router.route('/login').post((req,res)=>{
     User.find({username:req.body.username})
-        .then(user=>{
+        .then(async user=>{
             if (user==null){
                 res.status(400).json('Cant find user');
             }
             try{
-               const match=checkUser(req.body.password,user[0].password)
+               const match=await checkUser(req.body.password,user[0].password)
+               console.log(match)
                 if(match)
                 {
                     res.json(user)
                 }else
                 {
-                    res.json('Not Allowed');
+                    res.status(404).send('Not Allowed');
                 }
             } catch{
                 res.status(500).send()
@@ -55,10 +56,7 @@ router.route('/add').post(async (req,res) => {
     }
 
 });
-router.route('logged_in').get((req,res)=>{
-    then(()=>res.status(201).json('Login'));
 
-});
 async function checkUser(inputPassword,dbPassword){
     const match=await bcrypt.compare(inputPassword,dbPassword);
     return match;
