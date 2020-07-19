@@ -1,7 +1,7 @@
 import React,{Component}from 'react';
 import axios from 'axios';
-import AdminShowUser from'./AdminShowUser.component';
-import AdminSpecs from './AdminSpecs.component'
+import AdminShowUser from'../components/Admin Components/AdminShowUser.component';
+import AdminSpecs from '../components/Admin Components/AdminSpecs.component'
 
 export default class Admin extends Component{
     constructor(props){

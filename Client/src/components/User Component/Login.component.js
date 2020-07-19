@@ -14,6 +14,7 @@ export default class Login extends Component{
             password:'',
         }
     }
+    // handeling the form fields
     onChangeUsername(e){
         this.setState({
             username:e.target.value
@@ -24,6 +25,7 @@ export default class Login extends Component{
             password:e.target.value
         });
     }
+    // submiting the form
     onsubmit(e){
         e.preventDefault();
         const User={
@@ -31,7 +33,7 @@ export default class Login extends Component{
             password:this.state.password
         }
 
-        console.log(User);
+        console.log(User);// checking if the user username and password is the sane as saved as in the db
         axios.post('http://localhost:3000/users/login',User)
             .then(res=>{
                 if(res.data)
@@ -41,7 +43,7 @@ export default class Login extends Component{
             })
             .catch(err=>console.log(err))
         }
-    
+    // rendering the login form
     render(){
         return(
             <div>

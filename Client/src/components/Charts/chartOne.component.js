@@ -19,7 +19,7 @@ componentDidUpdate(prevProps,prevState){
         this.getChartData()
     }
 }
-getChartData(){//chart Todods vs SubTodos Thet added by mounth
+getChartData(){
     let Tododata=[0,0,0,0,0,0,0,0,0,0,0,0]
     let subtododata=[0,0,0,0,0,0,0,0,0,0,0,0]
     let TodoDataDone=[0,0,0,0,0,0,0,0,0,0,0,0]
@@ -61,7 +61,7 @@ getChartData(){//chart Todods vs SubTodos Thet added by mounth
         
     });
     this.setState({
-    chartDataLeft:{
+    chartDataLeft:{ //chart display todos and subtodos thet aren't done
         labels:["jun","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
         datasets:[{
          label:"Todos",
@@ -75,7 +75,7 @@ getChartData(){//chart Todods vs SubTodos Thet added by mounth
         },
         ]
     },
-    chartDataDone:{
+    chartDataDone:{ //chart display todos and subtodos that are done
         labels:["jun","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
         datasets:[{
          label:"Todos",
@@ -89,7 +89,7 @@ getChartData(){//chart Todods vs SubTodos Thet added by mounth
         },
         ]
     },
-    chartData:{
+    chartData:{ //chart Todods vs SubTodos Thet added by mounth
         labels:["jun","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
         datasets:[{
          label:"Todos",

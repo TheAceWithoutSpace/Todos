@@ -1,6 +1,6 @@
 import React,{Component}from 'react';
 import Axios from 'axios';
-import ChartOne from './chartOne.component';
+import ChartOne from '../components/Charts/chartOne.component';
 
 
 export default class UserSpecs extends Component{

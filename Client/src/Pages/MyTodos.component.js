@@ -1,6 +1,6 @@
 import React,{Component}from 'react';
 import {Link} from 'react-router-dom';
-import TodoBox from './TodoBox.component';
+import TodoBox from '../components/Todo Components/TodoBox.component';
 export default class MyTodos extends Component{
     render(){
          const userID=localStorage.getItem('UserID');

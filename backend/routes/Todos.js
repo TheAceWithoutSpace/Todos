@@ -1,12 +1,12 @@
 const router = require('express').Router();
 let Todo = require('../models/Todo.model');
-
+//get all todos
 router.route('/').get((req,res)=>{
     Todo.find()
         .then(Todo=>res.json(Todo))
         .catch(err=>res.status(400).json('Error:'+err));      
 });
-
+//add new todo
 router.route('/add').post((req,res)=>{
     const userId=req.body.userId;
     const Todotitle = req.body.Todotitle;
@@ -22,26 +22,31 @@ router.route('/add').post((req,res)=>{
         .then(()=>res.json('Todo added'))
         .catch(err=>res.status(400).json('Error'+err));
 });
+//get todo by userid
 router.route("/:id").get((req,res)=>{
     Todo.find({userId:req.params.id})
         .then(Todo=>res.json(Todo))
         .catch(err=>res.status(400).json('Error'+err));
 });
+//get todo by id
 router.route('/edit/:id').get((req,res)=>{
     Todo.findById(req.params.id)
         .then((Todos)=>res.json(Todos))
         .catch(err=>res.status(400).json('Error:'+err));
 });
+//delete todo 
 router.route("/:id").delete((req,res)=>{
     Todo.findByIdAndDelete(req.params.id)
         .then(()=>res.json('Todo deleted.'))
         .catch(err=>res.status(400).json('Error'+err));
 });
+//delete all todos by userId
 router.route('/deleteall/:id').delete((req,res)=>{
     Todo.deleteMany({userId:req.param.id})
         .then(()=>res.json('Todo Deleted'))
         .catch(err=>res.status(400).json('Error:'+err));
 });
+//toggle todo to done/undone
 router.route('/isdone/:id').post((req,res)=>{
     Todo.findById(req.params.id)
     .then(Todo=>{
@@ -52,6 +57,7 @@ router.route('/isdone/:id').post((req,res)=>{
     })
     .catch(err => res.status(400).json('Error:'+err));
 });
+//update todo
 router.route('/update/:id').post((req,res)=>{
     Todo.findById(req.params.id)
     .then(Todo=>{ 

@@ -16,6 +16,7 @@ export default class EditSubTodo extends Component{
             SubTodoDescription:'',
         }
     }
+    //getting the subtodo
     componentDidMount(){
         axios.get(`http://localhost:3000/SubTodos/edit/${this.props.match.params.id}`)
         .then(res=>{console.log(res.data)
@@ -26,18 +27,20 @@ export default class EditSubTodo extends Component{
         })
         .catch(err=>console.log('Error'+err))
     }
+    //handling form
     onChangeSubTodotitle(e){
         this.setState({
             SubTodotitle:e.target.value
             
         });
     }
+    //handling form 
     onChangeSubTodoDescription(e){
         this.setState({
             SubTodoDescription:e.target.value
         });
     }
-
+    //updating the current subtodo withe the new inputs
     onsubmit(e){
         e.preventDefault();
 
@@ -55,7 +58,7 @@ export default class EditSubTodo extends Component{
 
     render(){
         return(
-            <div>
+            <div className='text-center container'>
                 <h3>SubTodotitle</h3>
                 <form onSubmit={this.onsubmit}>
                     <div className="form-group">

@@ -8,6 +8,7 @@ export default class chart extends Component{
         chartData:props.chartData,
      }
  }
+ //definde static props
  static defaultProps={
     displayTitle:true,
     displayLegend:true,
@@ -21,6 +22,7 @@ componentDidUpdate(prevProps,prevState){
     }
 }
 render(){
+    //print the Bar chart
     if(this.props.type==='Bar')
     {
     return(
@@ -41,6 +43,7 @@ render(){
             />
         </div>
     )}else{
+        //print pie chart
         return(
             <div className='chart'>
             <Pie 

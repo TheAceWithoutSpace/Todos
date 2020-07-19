@@ -1,7 +1,7 @@
 import React,{Component}from 'react';
 import{Link} from 'react-router-dom';
 import axios from 'axios';
-
+//create Usere Row 
 const Users =(props)=>
 (
     <tr>
@@ -25,6 +25,7 @@ export default class AdminShowUser extends Component{
             this.getTodos();
         }
     }
+    //get the num of todos for each user
     async getTodos(){
         let Todos=[];
             for(let i=0;i<this.props.users.length;i++)
@@ -33,19 +34,21 @@ export default class AdminShowUser extends Component{
             }
         this.setState({users:this.props.users,Todos:Todos})
     }
+    //get todos by userId
     async TodosDataCall(ID){
         const TodoResponse=await axios.get(`http://localhost:3000/Todos/${ID}`)
         return(TodoResponse.data)
     }
+    //return user tabel
      usersList(){
         return this.state.users.map((Currentusers)=>{
-            let Todos;
+            let Todos=0;
             for(let i=0;i<this.state.Todos.length;i++)
             {
-                if(this.state.Todos[i][0].userId===Currentusers._id)
+                if(this.state.Todos[i].length!==0&&this.state.Todos[i][0].userId===Currentusers._id)
                 {
                 Todos=this.state.Todos[i].length
-                }
+              }
             }
             if(Currentusers._id!==localStorage.getItem('UserID'))
             {
@@ -58,12 +61,11 @@ export default class AdminShowUser extends Component{
                 <tr key={Currentusers._id}>
                     <td>admin {Currentusers.username}</td>
                     <td>{Todos}</td>
-                    {/* <td>{this.getTodos(Currentusers._id)}</td> */}
                 </tr>)
             }
         }
     )}
-    
+    //delete user his todos and subtodos
     DeleteUser(id){
         axios.get(`http://localhost:3000/Todos/${id}`)
         .then(res=>res.data.forEach(Todo => {
@@ -83,7 +85,7 @@ export default class AdminShowUser extends Component{
    
     render(){
         let userID=localStorage.getItem('UserID')
-        if(userID==='5eefc438666ffd2524a947a4')
+        if(userID==='5f11dc7e8be12941bc1fad8e')
         {
         return(
             <div>

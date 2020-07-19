@@ -28,7 +28,7 @@ export default class CreateTodo extends Component{
             SubTodoDescription:e.target.value
         });
     }
-
+    //send the form data to the server
     onsubmit(e){
         e.preventDefault();
         const SubTodo={
@@ -44,10 +44,10 @@ export default class CreateTodo extends Component{
             
             window.location=`/SubTodos/${localStorage.getItem('TodoID')}`;
     }
-
+    //subtodo form
     render(){
         return(
-            <div>
+            <div className='text-center container'>
                 <h3>Create New SubTodo</h3>
                 <form onSubmit={this.onsubmit}>
                     <div className="form-group">

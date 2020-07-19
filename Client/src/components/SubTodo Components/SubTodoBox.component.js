@@ -11,12 +11,13 @@ export default class SubTodoss extends Component{
             SubTodos:[],
             checked:'false'}
     }
-   
+//getting all the subtodos by the todo id    
     componentDidMount(){
         axios.get(`http://localhost:3000/SubTodos/${this.props.TodoID}`)
         .then(res=>{this.setState({SubTodos:res.data})})
         .catch(err=>{console.log('Error'+err)})
     }
+    //deleting the subtodo by the subtodo id
     deleteSubTodo(id){
         axios.delete('http://localhost:3000/SubTodos/'+id)
             .then(res=>console.log(res.data))
@@ -24,6 +25,7 @@ export default class SubTodoss extends Component{
             SubTodos:this.state.SubTodos.filter(el=>el._id!==id)
         })
     }
+    //printing all the subtodos in  table 
     SubTodosList(){
         return this.state.SubTodos.map(CurrentSubTodos=>{
             return<TableRow SubTodos={CurrentSubTodos} 

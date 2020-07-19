@@ -1,7 +1,7 @@
 import React from'react';
 import Axios from 'axios';
 import{Link} from 'react-router-dom';
-import './style.css'
+import '../style.css'
 
 export default class TodoTableRow extends React.Component{
 
@@ -10,6 +10,7 @@ export default class TodoTableRow extends React.Component{
         Subtodos:0,
         SubTodosDone:0,
     }
+    //handling the done prop
     handeleChange=()=>{
         let cheacked='';
         if(this.state.cheacked==='false')
@@ -22,14 +23,14 @@ export default class TodoTableRow extends React.Component{
         }     
         const Todo={
             done:cheacked,
-        }
+        }//sending the todo done prop
         Axios.post("http://localhost:3000/Todos/isdone/"+this.props.todo._id,Todo)
             .then(res => console.log(res.data));
     } 
     async UNSAFE_componentWillMount(){
     const SubTodo=await this.getSubTodos(this.props.todo._id);
     let SubTodosdone=0;
-    for(let i=0;i<SubTodo.length;i++)
+    for(let i=0;i<SubTodo.length;i++)// checking the subtodos done prop for all the subtodos in this todo
     {
         if(SubTodo[i].done==='true')
         {
@@ -38,12 +39,14 @@ export default class TodoTableRow extends React.Component{
     }
     this.setState({Subtodos:SubTodo.length,SubTodosDone:SubTodosdone})
     }
+    // get all subtodos for this todo
     async getSubTodos(CurrentTodo){
         const SubTodosResponse=await Axios.get(`http://localhost:3000/SubTodos/${CurrentTodo}`)
         return(SubTodosResponse.data)
     }
+
     render(){
-    if(this.state.cheacked==='true')
+    if(this.state.cheacked==='true')//if true rendering with a line through
     {
         return(
         <tr className={this.props.done}>

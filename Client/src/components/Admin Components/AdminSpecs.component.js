@@ -1,6 +1,6 @@
 import React,{Component}from 'react';
 import Axios from 'axios';
-import Chart from './chart.component';
+import Chart from '../Charts/chart.component';
 
 export default class AdminSpecs extends Component{
    constructor(props){
@@ -15,6 +15,7 @@ componentDidUpdate(prevProps,prevState){
         this.getTodos()
     }
 }
+//get all users todos
 async getTodos(){
     let Todos=[];
         for(let i=0;i<this.props.users.length;i++)
@@ -23,10 +24,12 @@ async getTodos(){
         }
         this.getChartData(Todos)
 }
+//get todos by id
 async TodosDataCall(ID){
     const TodoResponse=await Axios.get(`http://localhost:3000/Todos/${ID}`)
     return(TodoResponse.data)
 }
+//create chart data
  getChartData(Todos){
     let UsersbyTodos=[0,0,0,0,0,0,0,0,0,0,0]
     let flag=false;
@@ -35,7 +38,7 @@ async TodosDataCall(ID){
         {
             if(Todos[i].length!==0)
             {
-                console.log('Hello')
+
                 if(CurrentUser._id===Todos[i][0].userId)
                 {
                     flag='true';
@@ -71,7 +74,7 @@ async TodosDataCall(ID){
         }
     })
  }
-
+//call chart component and sending chartData
     render(){
         return(
             <div>

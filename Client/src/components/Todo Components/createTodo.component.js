@@ -19,6 +19,7 @@ export default class CreateTodo extends Component{
             Description:'',
         }
     }
+    //handeling the fields in the form
     onChangeTodotitle(e){
         this.setState({
             Todotitle:e.target.value
@@ -35,7 +36,7 @@ export default class CreateTodo extends Component{
             Description:e.target.value
         });
     }
-
+    //sending the form to the server and creating a new todo
     onsubmit(e){
         e.preventDefault();
 
@@ -53,10 +54,10 @@ export default class CreateTodo extends Component{
             
         window.location=`/MyTodos`
     }
-
+    //rendering the form 
     render(){
         return(
-            <div>
+            <div className='text-center container'>
                 <h3>Create New Todo</h3>
                 <form onSubmit={this.onsubmit}>
                     <div className="form-group">

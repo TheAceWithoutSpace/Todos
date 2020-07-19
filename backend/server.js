@@ -5,20 +5,27 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+//vars
+const MongoDbRoot="mongodb://localhost:27017/TodoApp";
+const mongoconnectmsg="Mongodb database connection established succsesfully";
+const port =3000;
+const serverRunningMsg='Server is running on port:'+port;
+const TodoRouter=require('./routes/Todos');
+const SubTodosRouter=require('./routes/SubTodos');
+const UsersRouter=require('./routes/users');
 
-
-mongoose.connect("mongodb://localhost:27017/TodoApp", {useNewUrlParser:true,useCreateIndex:true});
+// connecting to local db 
+mongoose.connect(MongoDbRoot, {useNewUrlParser:true,useCreateIndex:true});
 const connection=mongoose.connection;
 connection.once('open',()=>{
-    console.log("Mongodb database connection established succsesfully");
+    console.log(mongoconnectmsg);
 })
 
- const TodoRouter=require('./routes/Todos');
- const SubTodosRouter=require('./routes/SubTodos');
- const UsersRouter=require('./routes/users');
-
+//TodoRoutes
  app.use('/Todos',TodoRouter);
+  //SubTodosRoute
  app.use('/SubTodos',SubTodosRouter);
+ //UsersRoute
  app.use('/users',UsersRouter);
 
-app.listen(3000,()=>console.log(`Server is running on port:3000`));
+app.listen(port,()=>console.log(serverRunningMsg));

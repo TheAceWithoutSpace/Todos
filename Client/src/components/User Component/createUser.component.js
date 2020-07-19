@@ -16,6 +16,7 @@ export default class createUser extends Component{
             password:'',
         }
     }
+    // handeling form fields
     onChangeUsername(e){
         this.setState({
             username:e.target.value
@@ -31,6 +32,7 @@ export default class createUser extends Component{
             password:e.target.value
         });
     }
+    // submiting the form and creating new user in the server
     onsubmit(e){
         e.preventDefault();
         const user={
@@ -50,7 +52,7 @@ export default class createUser extends Component{
             })
             .catch(err=>console.log("signup err"+err));
     }
-    
+    // rendering the formn
     render(){
         return(
             <div>

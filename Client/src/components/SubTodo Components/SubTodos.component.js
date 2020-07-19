@@ -7,6 +7,7 @@ export default class MyTodos extends Component{
         super(props);
         this.deleteTodo=this.deleteTodo.bind(this);
     }
+    //deleteing the main Todo and all the subtodos for this Todo
     deleteTodo(id){
         axios.delete('http://localhost:3000/SubTodos/deleteall/'+id)
                 .then(axios.delete('http://localhost:3000/Todos/'+id)
@@ -14,6 +15,7 @@ export default class MyTodos extends Component{
             )
             window.location=`/MyTodos`
             }
+            
     render(){
         localStorage.setItem('TodoID',this.props.match.params.id)
         return(

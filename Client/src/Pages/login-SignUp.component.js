@@ -1,6 +1,6 @@
 import React,{Component}from 'react';
-import Login from './Login.component';
-import Signup from './createUser.component';
+import Login from '../components/User Component/Login.component';
+import Signup from '../components/User Component/createUser.component';
 
 export default class Login_Signup extends Component{
     constructor(props){
@@ -33,13 +33,17 @@ export default class Login_Signup extends Component{
     }  
     render(){
         const flag=this.state.status;
-        const temp =this.state.mod
         return(
-            <div className="container border border-dark" style={{width:'35%',margin: '0% auto',padding:'12%',background:'rgb(246, 246, 246)'}}>
-                <div className="row">
-                    {flag?<Login err={this.state.err} className="container" Auth={this.Auth}/>:<Signup className="container" Auth={this.Auth}/>}
-                    <button className="btn btn-outline-info btn-block" onClick={this.handelLog}>{temp}</button>
-                </div>
+            <div className="text-center container" >
+                    {flag?
+                    <div>
+                        <Login err={this.state.err} className="container" Auth={this.Auth}/>
+                        <button className="btn btn-outline-info btn-block" onClick={this.handelLog}>To SignUp</button>
+                    </div>
+                    :<div>
+                        <Signup className="container" Auth={this.Auth}/>
+                        <button className="btn btn-outline-info btn-block" onClick={this.handelLog}>To Login</button>
+                    </div>}
             </div>
         )
     }

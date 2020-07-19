@@ -19,6 +19,7 @@ export default class EditTodo extends Component{
             Description:'',
         }
     }
+    // getting the current todo 
     componentDidMount(){
         axios.get('http://localhost:3000/Todos/edit/'+this.props.match.params.id)
         .then(res=>{
@@ -30,6 +31,7 @@ export default class EditTodo extends Component{
         })
         .catch(err=>console.log('Error'+err))
     }
+    //handeling the fields and updateing the fields
     onChangeTodotitle(e){
         this.setState({
             Todotitle:e.target.value
@@ -55,17 +57,17 @@ export default class EditTodo extends Component{
             Todosevingdate:this.state.Todosevingdate,
             Description:this.state.Description
         }
-        //console.log(Todo);
 
-        console.log(this.props.match.params)
+
+        //sending the todo after updateing the fields
         axios.post('http://localhost:3000/Todos/update/'+this.props.match.params.id,Todo)
             .then(res=>console.log(res.data));
         window.location='/MyTodos';
     }   
-
+    // form
     render(){
         return(
-            <div>
+            <div className='text-center container'>
                 <h3>Edit Todo</h3>
                 <form onSubmit={this.onsubmit}>
                     <div className="form-group">

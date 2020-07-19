@@ -2,18 +2,18 @@ import React, { Component } from 'react';
 import {BrowserRouter as Router,Route} from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css"
 import Navbar from "./components/navbar.component";
-import HomePage from "./components/Home.component";
-import CreateTodo from "./components/createTodo.component";
-import createSubTodo from "./components/createSubTodo.component";
-import EditTodo from "./components/EditTodo.component";
-import MyTodos from './components/MyTodos.component';
-import UserSpecs from './components/UserSpecs.component';
-import LoginSignup from './components/login-SignUp.component';
-import SubTodos from'./components/SubTodos.component';
-import EditSubtodo from'./components/EditSubTodo.component';
-import AdminShowUser from './components/AdminShowUser.component';
-import AdminSpecs from "./components/AdminSpecs.component";
-import Admin from "./components/Admin.component";
+import HomePage from "./Pages/Home.component";
+import CreateTodo from "./components/Todo Components/createTodo.component";
+import createSubTodo from "./components/SubTodo Components/createSubTodo.component";
+import EditTodo from "./components/Todo Components/EditTodo.component";
+import MyTodos from './Pages/MyTodos.component';
+import UserSpecs from './Pages/UserSpecs.component';
+import LoginSignup from './Pages/login-SignUp.component';
+import SubTodos from'./components/SubTodo Components/SubTodos.component';
+import EditSubtodo from'./components/SubTodo Components/EditSubTodo.component';
+import AdminShowUser from './components/Admin Components/AdminShowUser.component';
+import AdminSpecs from "./components/Admin Components/AdminSpecs.component";
+import Admin from "./Pages/Admin.component";
 
 export default class App extends Component{
   constructor(){
