@@ -3,13 +3,20 @@ const router = require('express').Router();
 let User = require('../models/User.model');
 const bcrypt = require('bcrypt');
 
+<<<<<<< HEAD
 //get all users
+=======
+const Login=false;
+>>>>>>> 88f860f893279b24b233ebeb868bf1dd73d0b549
 router.route('/').get((req,res)=>{
 User.find()
     .then(users=>res.json(users))
     .catch(err=>res.status(400).json('Error:'+err));
 });
+<<<<<<< HEAD
 //login
+=======
+>>>>>>> 88f860f893279b24b233ebeb868bf1dd73d0b549
 router.route('/login').post((req,res)=>{
     User.find({username:req.body.username})
         .then(async user=>{
@@ -31,13 +38,19 @@ router.route('/login').post((req,res)=>{
             }
         })
 });
+<<<<<<< HEAD
 //delete user
+=======
+>>>>>>> 88f860f893279b24b233ebeb868bf1dd73d0b549
 router.route("/:id").delete((req,res)=>{
     User.findByIdAndDelete(req.params.id)
         .then(()=>res.json('User deleted.'))
         .catch(err=>res.status(400).json('Error'+err));
 });
+<<<<<<< HEAD
 //create new user
+=======
+>>>>>>> 88f860f893279b24b233ebeb868bf1dd73d0b549
 router.route('/add').post(async (req,res) => {
     
     try{  
@@ -49,7 +62,10 @@ router.route('/add').post(async (req,res) => {
             username:username,
             email:email,
             password:password,
+<<<<<<< HEAD
             Admin:false
+=======
+>>>>>>> 88f860f893279b24b233ebeb868bf1dd73d0b549
         });
         newUser.save()
             .then(user=>res.status(201).json(user._id))
@@ -60,7 +76,11 @@ router.route('/add').post(async (req,res) => {
     }
 
 });
+<<<<<<< HEAD
 //encript password
+=======
+
+>>>>>>> 88f860f893279b24b233ebeb868bf1dd73d0b549
 async function checkUser(inputPassword,dbPassword){
     const match=await bcrypt.compare(inputPassword,dbPassword);
     return match;
