@@ -18,6 +18,10 @@ const userSchema=new Schema({
         type:String,
         minlength:2
     },
+    Admin:{
+        required:true,
+        type:Boolean,
+    }
 },{
     timestamp:true,
 });

@@ -3,12 +3,13 @@ const router = require('express').Router();
 let User = require('../models/User.model');
 const bcrypt = require('bcrypt');
 
-const Login=false;
+//get all users
 router.route('/').get((req,res)=>{
 User.find()
     .then(users=>res.json(users))
     .catch(err=>res.status(400).json('Error:'+err));
 });
+//login
 router.route('/login').post((req,res)=>{
     User.find({username:req.body.username})
         .then(async user=>{
@@ -30,11 +31,13 @@ router.route('/login').post((req,res)=>{
             }
         })
 });
+//delete user
 router.route("/:id").delete((req,res)=>{
     User.findByIdAndDelete(req.params.id)
         .then(()=>res.json('User deleted.'))
         .catch(err=>res.status(400).json('Error'+err));
 });
+//create new user
 router.route('/add').post(async (req,res) => {
     
     try{  
@@ -46,6 +49,7 @@ router.route('/add').post(async (req,res) => {
             username:username,
             email:email,
             password:password,
+            Admin:false
         });
         newUser.save()
             .then(user=>res.status(201).json(user._id))
@@ -56,7 +60,7 @@ router.route('/add').post(async (req,res) => {
     }
 
 });
-
+//encript password
 async function checkUser(inputPassword,dbPassword){
     const match=await bcrypt.compare(inputPassword,dbPassword);
     return match;
