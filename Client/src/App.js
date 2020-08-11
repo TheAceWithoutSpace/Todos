@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import {BrowserRouter as Router,Route} from "react-router-dom";
+import {connect} from 'react-redux';
+import {GetTodos,GetSubTodos} from  '../src/Actions/index'
+
 import "bootstrap/dist/css/bootstrap.min.css"
 import Navbar from "./components/navbar.component";
 import HomePage from "./Pages/Home.component";
@@ -15,23 +18,13 @@ import AdminShowUser from './components/Admin Components/AdminShowUser.component
 import AdminSpecs from "./components/Admin Components/AdminSpecs.component";
 import Admin from "./Pages/Admin.component";
 
-export default class App extends Component{
+ class App extends Component{
   constructor(){
     super();
-    this.state={
-      loggedInStatus:"Not_Logged_in",
-      user:{}
-    };
-
     this.handleLogin=this.handleLogin.bind(this);
   }
 
   handleLogin(data){
-    this.setState({
-      loggedInStatus:'LoggedIn',
-      user:data
-      
-    });
     localStorage.setItem('UserID',data);
   }
   render()
@@ -41,12 +34,12 @@ export default class App extends Component{
         <Router>
           <Navbar />
           <br/>
-          <Route path="/" exact render={props=>(<HomePage {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.loggedInStatus}/>)}/>
+          <Route path="/" exact render={props=>(<HomePage {...props} handleLogin={this.handleLogin}/>)}/>
           <Route path='edit/:id' component={EditTodo}/>
-          <Route path='/createTodo' exact render={props => (<CreateTodo{...props} user={this.state.user}/>)} />
+          <Route path='/createTodo' exact render={props => (<CreateTodo{...props}/>)} />
           <Route path='/createSubTodo'component={createSubTodo}/>
-          <Route path="/Login" exact render={props=>(<LoginSignup {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.loggedInStatus}/>)}/>
-          <Route path="/myTodos" exact render={props=>(<MyTodos {...props} handleLogin={this.handleLogin} user={this.state.user} loggedInStatus={this.state.loggedInStatus}/>)}/>
+          <Route path="/Login" exact render={props=>(<LoginSignup {...props} handleLogin={this.handleLogin}/>)}/>
+          <Route path="/myTodos" component={MyTodos}/>
           <Route path="/UserSpecs" component={UserSpecs}/>
           <Route path="/EditTodo/:id" component={EditTodo}/> 
           <Route path="/SubTodos/:id" component={SubTodos}/>
@@ -59,3 +52,8 @@ export default class App extends Component{
   );
 }
 }
+const mapStateToProps=(state)=>{
+      return {Todos:state.Todos,SubTodos:state.SubTodos};
+  };
+
+export default connect(mapStateToProps,{GetTodos,GetSubTodos})(App)

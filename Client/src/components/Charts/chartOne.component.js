@@ -1,5 +1,4 @@
 import React,{Component}from 'react';
-// import Axios from 'axios';
 import Chart from './chart.component';
 
 export default class chartOne extends Component{
@@ -26,8 +25,6 @@ getChartData(){
     let SubtodoDataDone=[0,0,0,0,0,0,0,0,0,0,0,0]
     let TodoDataLeft=[0,0,0,0,0,0,0,0,0,0,0,0]
     let SubtodoDataLeft=[0,0,0,0,0,0,0,0,0,0,0,0]
-    let flag='false';
-    console.log(this.props)
     this.props.Todos.forEach(currentTodo => {
         let num=(parseInt(currentTodo.Todosevingdate[5]+currentTodo.Todosevingdate[6]))-1;
         Tododata[num]+=1;
@@ -38,27 +35,21 @@ getChartData(){
                     subtododata[num]+=1;
                     if(currentSubTodo.done==='true'){
                         SubtodoDataDone[num]+=1;
-                        if(SubtodoDataDone[num]===currentSubTodos.length)
-                        {
-                            TodoDataDone[num]+=1;
-                        }
                     }else{
                     SubtodoDataLeft[num]+=1;
-                    if(flag==='false'){
-                        TodoDataLeft[num]+=1;
-                        flag=true;
-                    }
                     }
                 })
             }
-            else if(currentTodo.done===true)
-            {
-            TodoDataDone[num]+=1;
-            }else{
-            TodoDataLeft[num]+=1;
-            }
+
         })
-        
+        if(currentTodo.done==='true')
+        {
+        TodoDataDone[num]+=1;
+        }
+        else
+        {
+            TodoDataLeft[num]+=1;
+        }
     });
     this.setState({
     chartDataLeft:{ //chart display todos and subtodos thet aren't done
@@ -109,7 +100,7 @@ getChartData(){
         return(
             <div>
                 <Chart title='New Todos and SubTodos' chartData={this.state.chartData}/>
-                <Chart title='Todos and SubTodos done' chartData={this.state.chartDataDone}/>
+                <Chart title='Todos and SubTodos done' type='HorizontalBar' chartData={this.state.chartDataDone}/>
                 <Chart title='Todos and SubTodos left' chartData={this.state.chartDataLeft}/>
             </div>
         )

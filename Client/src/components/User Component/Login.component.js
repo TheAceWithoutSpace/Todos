@@ -1,7 +1,8 @@
 import React,{Component}from 'react';
 import axios from 'axios';
-
-export default class Login extends Component{
+import {connect} from 'react-redux';
+import {isAdmin} from  '../../Actions'
+class Login extends Component{
     
     constructor(props){
         super(props);
@@ -38,13 +39,19 @@ export default class Login extends Component{
             .then(res=>{
                 if(res.data)
                 {
+                    this.props.isAdmin(res.data[0].Admin)
+                    if(res.data[0].Admin===true)
+                    {
+                        console.log('admin')
+                    }
                     this.props.Auth(res.data[0]._id)
                 }
             })
-            .catch(err=>console.log(err))
+            .catch(err=>alert("Wrong UserName or Password"))
         }
     // rendering the login form
-    render(){
+    render(){ 
+
         return(
             <div>
             <h3>Login</h3>
@@ -69,3 +76,9 @@ export default class Login extends Component{
         )
     }
 }
+const mapStateToProps=(state)=>{
+console.log(state);
+    return {Admin:state.Admin};
+};
+
+export default connect(mapStateToProps,{isAdmin})(Login);

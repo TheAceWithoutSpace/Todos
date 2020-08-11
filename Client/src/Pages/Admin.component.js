@@ -13,15 +13,13 @@ export default class Admin extends Component{
     async UNSAFE_componentWillMount(){
         this.setState({Users:await this.getUsers()})
     }
+    //get all the users
         async getUsers(){
             const ResUsers=await axios.get(`http://localhost:3000/Users/`)
             return(await ResUsers.data)
         }
-        async getTodos(id){
-            const TodoResponse=await axios.get('http://localhost:3000/Todos/'+id)
-            return(await TodoResponse.data)
             
-        }
+        
      render(){
         return(
             <div>

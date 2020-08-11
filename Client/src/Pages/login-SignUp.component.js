@@ -7,42 +7,30 @@ export default class Login_Signup extends Component{
         super(props);
         this.state={
             status:false,
-            mod:'Login',
-            err:''
         }
         
         this.Auth=this.Auth.bind(this);
         this.handelLog=this.handelLog.bind(this);
-        this.handelmod=this.handelmod.bind(this);
     }
     Auth(data){
         this.props.handleLogin(data);
         console.log(data);
-        window.location='/MyTodos';
+        window.location=("/MyTodos");
     }
     handelLog(){
         this.setState(state=>({status:!state.status} ))
-        this.handelmod()
-    } 
-    handelmod(){
-        let mod=this.state.status;
-        if (mod === false)
-            this.setState({mod:'SignUp'});
-        if (mod)
-            this.setState({mod:'Login'});
-    }  
+    }
     render(){
-        const flag=this.state.status;
         return(
-            <div className="text-center container" >
-                    {flag?
-                    <div>
+            <div className="container my-5" >
+                    {this.state.status?
+                    <div className ="col-sm-6 text-center mx-auto ">
                         <Login err={this.state.err} className="container" Auth={this.Auth}/>
-                        <button className="btn btn-outline-info btn-block" onClick={this.handelLog}>To SignUp</button>
+                        <button className="btn btn-outline-info btn-block" onClick={this.handelLog}>SignUp</button>
                     </div>
-                    :<div>
+                    :<div className ="col-sm-6 text-center mx-auto">
                         <Signup className="container" Auth={this.Auth}/>
-                        <button className="btn btn-outline-info btn-block" onClick={this.handelLog}>To Login</button>
+                        <button className="btn btn-outline-info btn-block" onClick={this.handelLog}>Login</button>
                     </div>}
             </div>
         )

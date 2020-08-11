@@ -1,5 +1,5 @@
 import React,{Component}from 'react';
-import {Bar,Pie} from 'react-chartjs-2';
+import {Bar,Pie,HorizontalBar} from 'react-chartjs-2';
 
 export default class chart extends Component{
  constructor(props){
@@ -23,27 +23,26 @@ componentDidUpdate(prevProps,prevState){
 }
 render(){
     //print the Bar chart
-    if(this.props.type==='Bar')
-    {
-    return(
+    switch (this.props.type){
+    case 'Bar':
+        return(
         <div className='chart'>
-            <Bar 
+        <Bar 
             data={this.state.chartData}
             options={{
-                title:{
-                    display:this.props.displayTitle,
-                    text:this.props.title,
-                    fontSize:25
-                },
-                legend:{
-                    display:this.props.displayLegend,
-                    position:this.props.legendPosition
+            title:{
+            display:this.props.displayTitle,
+            text:this.props.title,
+            fontSize:25
+            },legend:{
+                display:this.props.displayLegend,
+                position:this.props.legendPosition
                 }
-            }}
-            />
-        </div>
-    )}else{
-        //print pie chart
+           }}
+        />
+        </div>)
+    case 'Pie':{
+            //print pie chart
         return(
             <div className='chart'>
             <Pie 
@@ -63,6 +62,30 @@ render(){
         </div>
         )
     }
+    case 'HorizontalBar':{
+        //prints horizontalBar
+        return(
+            <div className='chart'>
+            <HorizontalBar
+            data={this.state.chartData}
+            options={{
+                title:{
+                    display:this.props.displayTitle,
+                    text:this.props.title,
+                    fontSize:25
+                },
+                legend:{
+                    display:this.props.displayLegend,
+                    position:this.props.legendPosition
+                }
+            }}
+            />
+        </div>            
+        )
 
+        }
+        default:
+        break
+    }
 }
 }

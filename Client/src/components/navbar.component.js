@@ -1,15 +1,19 @@
 import React,{Component} from 'react';
 import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
+
 function logout()
 {
 localStorage.removeItem('UserID')
+localStorage.removeItem('TodoID')
+localStorage.removeItem('state')
 window.location.href = '/';
 }
-function Loggedin (){
+function Loggedin (props){
     const isLoggedIn=localStorage.getItem('UserID')
     if(isLoggedIn)
     {
-        if(isLoggedIn==='5f11dc7e8be12941bc1fad8e')
+        if(props.Admin===true)
         {
             return(
             <ul className="navbar-nav mr-auto">
@@ -50,17 +54,21 @@ function Loggedin (){
         </ul>)
     }
 }
-export default class Navbar extends Component{
+class Navbar extends Component{
     
     render(){
-        console.log(this)
         return(
             <nav className="navbar navbar-dark bg-dark navbar-expand-lg">
                 <Link to='/' className="navbar-brand">Todo's</Link>
                 <div className="collpase navbar-collapse">  
-                    <Loggedin/>
+                    <Loggedin Admin={this.props.Admin}/>
                 </div>
             </nav>
         );
     }
 }
+const mapStateToProps=(state)=>{
+        return {Admin:state.Admin};
+    };
+
+export default connect(mapStateToProps)(Navbar);
